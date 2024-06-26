@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>UpdateLocation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link type="text/css" rel="stylesheet" href="style.css"/>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <h3>Vendor Info</h3>
+        <p>Update your information here!</p>
+        <form id="myForm">
+            <label for="id">ID<strong>*required</strong></label><br>
+            <input type="text" id="id" name="id"><br><br>
+            <label for="address">Address <strong>*required</strong></label><br>
+            <input type="text" id="address" name="address"><br><br>
+            <input type="submit" id="submit" name="submit">
+        </form>
+        <button type="button" onClick="submitForm()">Buy</button>
+        <script>
+            const thisForm = document.getElementById('myForm');
+thisForm.addEventListener('submit', async function (e) {
+  e.preventDefault();
+  const formData = new FormData(e.target); // Get form data as FormData object
+// Add data to your FormData object here
+
+const jsonData = Object.fromEntries(formData.entries());
+const jsonString = JSON.stringify(jsonData);
+alert(jsonString)
+console.log(jsonString); // This will be your JSON string representation of the form data
+  let response = await fetch('https://c91dhm43m2.execute-api.us-east-1.amazonaws.com/dev/update/', {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: jsonString
+});
+});
+function submitForm() {
+    alert("Hi");
+    fetch('https://c91dhm43m2.execute-api.us-east-1.amazonaws.com/dev/update/', {
+        method: 'POST', // Or 'PUT', 'DELETE', etc.
+        headers: {
+            'Content-Type': 'application/json'
+            // Add any additional headers if needed
+        },
+    })
+    .then(response => {
+        // Handle response
+        if (response.ok) {
+            // Request was successful
+            alert(response.ok);
+            //location.reload();
+        } else {
+            // Request failed
+            alert('Error submitting form!');
+            alert(response)
+        }
+    })
+    .catch(error => {
+        // Handle error
+        console.error('Error:', error);
+        alert('Error submitting form!');
+    });
+}
+        </script>
+    </body>
+</html>
