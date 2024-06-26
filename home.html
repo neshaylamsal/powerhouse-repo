@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StrEATS</title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/papaparse/papaparse.min.js"></script>
+</head>
+<body>
+<div class="background background-tint">
+    <div class="header">
+        <div class="logo">StrEATS</div>
+        <div class="menu-icon" onclick="toggleMenu()" id="menu-icon">&#9776;</div>
+        <div class="menu" id="menu">
+            <a href="#home">Home</a>
+            <a href="#search">Search</a>
+            <a href="#nearme">Near Me</a>
+            <a href="#vendoracc">Vendor Account</a>
+            <a href="#login">Login</a>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Your Next Bite Awaits.</h1>
+        <h2>Extraordinary Finds.</h2>
+        <div class="mouse_scroll">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <div>
+                <span class="m_scroll_arrows unu"></span>
+                <span class="m_scroll_arrows doi"></span>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="o-container">
+        <div class="ourp">
+            Our Picks
+        </div>
+        <div class="grid-container">
+            <div class="grid-item">McDonald's</div>
+            <div class="grid-item">Subway</div>
+            <div class="grid-item">KFC</div>
+        
+        </div>
+          </div>
+
+
+          <div class="topr">
+            Top Rated
+        </div>
+
+
+          <div class="grid-container">
+            <div class="grid-item">McDonald's</div>
+            <div class="grid-item">Subway</div>
+            <div class="grid-item">KFC</div>
+            <div class="grid-item">Wendy's</div>
+            <div class="grid-item">Burger King</div>
+            <div class="grid-item">Popeyes</div>
+          </div>
+
+
+
+          <div class="newt">
+            New Trucks
+        </div>
+
+
+          <div class="grid-container">
+            <div class="grid-item">Wendy's</div>
+            <div class="grid-item">Burger King</div>
+            <div class="grid-item">Popeyes</div>
+          </div>
+
+
+
+          <div class="other">
+            do later
+        </div>
+
+
+          <div class="grid-container">
+            <div class="grid-item1"></div>
+            <div class="grid-item2"></div>
+            <div class="grid-item3"></div>
+          </div>
+
+
+
+
+          
+</div>
+<script>
+    function toggleMenu() {
+        var menu = document.getElementById('menu');
+        var menuIcon = document.getElementById('menu-icon');
+        if (menu.style.display === 'flex') {
+            menu.style.display = 'none';
+            menuIcon.innerHTML = '&#9776;';
+        } else {
+            menu.style.display = 'flex';
+            menuIcon.innerHTML = '&times;';
+        }
+    }
+
+    document.getElementById('map-image').addEventListener('click', function() {
+        window.location.href = "#about";
+    });
+</script>
+
+</body>
+</html>
