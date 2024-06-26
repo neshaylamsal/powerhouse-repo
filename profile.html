@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV to HTML Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+    <!-- Include PapaParse library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+</head>
+<body>
+    <h1>Here is a list of all our food trucks!</h1>
+    <table id="csvTable">
+        <!-- Table content will be inserted here by JavaScript -->
+    </table>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Define the CSV file path
+            const csvFilePath = 'data.csv';
+            
+            // Fetch the CSV file
+            fetch(csvFilePath)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.text();
+                })
+                .then(csvText => {
+                    // Parse CSV text to JSON
+                    const parsedData = Papa.parse(csvText, {
+                        header: true,
+                        dynamicTyping: true
+                    }).data;
+
+                    // Generate the HTML table from parsed CSV data
+                    generateTable(parsedData);
+                })
+                .catch(error => {
+                    console.error('Error fetching CSV file:', error);
+                });
+        });
+
+        function generateTable(data) {
+            const table = document.getElementById('csvTable');
+
+            // Create table header row
+            const headerRow = document.createElement('tr');
+            const headers = Object.keys(data[0]);
+            headers.forEach(header => {
+                const th = document.createElement('th');
+                th.textContent = header;
+                headerRow.appendChild(th);
+            });
+            table.appendChild(headerRow);
+
+            // Create table rows
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                headers.forEach(header => {
+                    const cell = document.createElement('td');
+                    cell.textContent = item[header];
+                    row.appendChild(cell);
+                });
+                table.appendChild(row);
+            });
+        }
+    </script>
+</body>
+</html>
